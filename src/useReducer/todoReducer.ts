@@ -1,3 +1,5 @@
+import { ACTION_TYPES } from "../helpers/constants";
+
 interface InitialState {
     id: number;
     desc: string;
@@ -14,8 +16,8 @@ export const todoReducer = (
     action: Action
 ) => {
     switch (action.type) {
-        case "ABC":
-            throw new Error("Not implemented");
+        case ACTION_TYPES.Add:
+            return [...initialState, action.payload];
         default:
             return initialState;
     }
