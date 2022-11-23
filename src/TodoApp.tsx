@@ -1,29 +1,22 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { TodoAdd, TodoList } from "./components";
 import { ACTION_TYPES } from "./helpers/constants";
+import { ITEM_LOCAL_STORAGE } from "./helpers/itemsLocalStorage";
 import { Todo } from "./interfaces/Todo.interfaces";
 import { todoReducer } from "./useReducer/todoReducer";
 
-const initialState = [
-    {
-        id: new Date().getTime(),
-        desc: "Aprender React",
-        done: false,
-    },
-    {
-        id: new Date().getTime() * 3,
-        desc: "Aprender Angular",
-        done: false,
-    },
-    {
-        id: new Date().getTime() * 6,
-        desc: "Aprender Vue",
-        done: false,
-    },
-];
+const initialState: Todo[] = [];
+
+const init = () => {
+    return JSON.parse(localStorage.getItem(ITEM_LOCAL_STORAGE.todo)!) || [];
+};
 
 const TodoApp = () => {
-    const [todos, dispatch] = useReducer(todoReducer, initialState);
+    const [todos, dispatch] = useReducer(todoReducer, initialState, init);
+
+    useEffect(() => {
+        localStorage.setItem(ITEM_LOCAL_STORAGE.todo, JSON.stringify(todos));
+    }, [todos]);
 
     const handleNewTodo = (todo: Todo) => {
         const action = {
