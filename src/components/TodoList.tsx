@@ -1,11 +1,16 @@
-import { Todo, TodoListProps } from "../interfaces/Todo.interfaces";
+import { Todo } from "../interfaces/Todo.interfaces";
 import TodoItem from "./TodoItem";
 
-const TodoList = ({ todos }: TodoListProps) => {
+interface TodoListProps {
+    todos: Todo[];
+    onDeleteTodo: (id: number) => void;
+}
+
+const TodoList = ({ todos, onDeleteTodo }: TodoListProps) => {
     return (
         <ul className="list-group">
             {todos.map((todo: Todo, i) => (
-                <TodoItem key={todo.id} {...todo} />
+                <TodoItem key={todo.id} {...todo} onDeleteTodo={onDeleteTodo} />
             ))}
         </ul>
     );

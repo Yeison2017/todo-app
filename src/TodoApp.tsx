@@ -27,6 +27,13 @@ const TodoApp = () => {
         dispatch(action);
     };
 
+    const handleDeleteTodo = (id: number) => {
+        dispatch({
+            type: ACTION_TYPES.Delete,
+            payload: id,
+        });
+    };
+
     return (
         <div className="container">
             <h2>
@@ -36,7 +43,7 @@ const TodoApp = () => {
 
             <div className="row">
                 <div className="col-7">
-                    <TodoList todos={todos} />
+                    <TodoList todos={todos} onDeleteTodo={handleDeleteTodo} />
                 </div>
 
                 <div className="col-5">

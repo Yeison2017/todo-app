@@ -18,6 +18,9 @@ export const todoReducer = (
     switch (action.type) {
         case ACTION_TYPES.Add:
             return [...initialState, action.payload];
+
+        case ACTION_TYPES.Delete:
+            return initialState.filter((todo) => todo.id !== action.payload);
         default:
             return initialState;
     }
