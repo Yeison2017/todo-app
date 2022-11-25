@@ -1,45 +1,9 @@
-import { useEffect, useReducer } from "react";
 import { TodoAdd, TodoList } from "./components";
-import { ACTION_TYPES } from "./helpers/constants";
-import { ITEM_LOCAL_STORAGE } from "./helpers/itemsLocalStorage";
-import { Todo } from "./interfaces/Todo.interfaces";
-import { todoReducer } from "./useReducer/todoReducer";
-
-const initialState: Todo[] = [];
-
-const init = () => {
-    return JSON.parse(localStorage.getItem(ITEM_LOCAL_STORAGE.todo)!) || [];
-};
+import useTodo from "./hooks/useTodo";
 
 const TodoApp = () => {
-    const [todos, dispatch] = useReducer(todoReducer, initialState, init);
-
-    useEffect(() => {
-        localStorage.setItem(ITEM_LOCAL_STORAGE.todo, JSON.stringify(todos));
-    }, [todos]);
-
-    const handleNewTodo = (todo: Todo) => {
-        const action = {
-            type: ACTION_TYPES.Add,
-            payload: todo,
-        };
-
-        dispatch(action);
-    };
-
-    const handleDeleteTodo = (id: number) => {
-        dispatch({
-            type: ACTION_TYPES.Delete,
-            payload: id,
-        });
-    };
-
-    const handleToggleTodo = (id: number) => {
-        dispatch({
-            type: ACTION_TYPES.Toggle,
-            payload: id,
-        });
-    };
+    const { todos, handleNewTodo, handleDeleteTodo, handleToggleTodo } =
+        useTodo();
 
     return (
         <div className="container">
