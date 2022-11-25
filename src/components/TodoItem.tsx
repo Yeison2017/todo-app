@@ -2,12 +2,26 @@ import { Todo } from "../interfaces/Todo.interfaces";
 
 interface TodoItemProps extends Todo {
     onDeleteTodo: (id: number) => void;
+    onToggleTodo: (id: number) => void;
 }
 
-const TodoItem = ({ id, desc, onDeleteTodo }: TodoItemProps) => {
+const TodoItem = ({
+    id,
+    desc,
+    done,
+    onDeleteTodo,
+    onToggleTodo,
+}: TodoItemProps) => {
     return (
         <li className="list-group-item d-flex justify-content-between">
-            <span className="align-self-center">{desc}</span>
+            <span
+                className={`align-self-center ${
+                    done ? "text-decoration-line-through" : ""
+                }`}
+                onClick={() => onToggleTodo(id)}
+            >
+                {desc}
+            </span>
             <button className="btn btn-danger" onClick={() => onDeleteTodo(id)}>
                 Borrar
             </button>
