@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { Todo } from "..//interfaces/Todo.interfaces";
 import { ACTION_TYPES } from "../helpers/constants";
 import { ITEM_LOCAL_STORAGE } from "../helpers/itemsLocalStorage";
@@ -10,9 +10,13 @@ const init = () => {
 
 const useTodo = () => {
     const [todos, dispatch] = useReducer(todoReducer, [], init);
+    // const [todosCount, setTodosCount] = useState(0);
+    // const [pendingTodosCount, setPendingTodosCount] = useState(0);
 
     useEffect(() => {
         localStorage.setItem(ITEM_LOCAL_STORAGE.todo, JSON.stringify(todos));
+        // setTodosCount(todos.length);
+        // setPendingTodosCount(todos.filter((todo) => !todo.done).length);
     }, [todos]);
 
     const handleNewTodo = (todo: Todo) => {
@@ -39,6 +43,8 @@ const useTodo = () => {
     };
     return {
         todos,
+        todosCount: todos.length,
+        pendingTodosCount: todos.filter((todo) => !todo.done).length,
         handleNewTodo,
         handleDeleteTodo,
         handleToggleTodo,
