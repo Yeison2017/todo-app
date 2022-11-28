@@ -1,7 +1,7 @@
 import { Todo } from "../interfaces/Todo.interfaces";
 import TodoItem from "./TodoItem";
 
-interface TodoListProps {
+export interface TodoListProps {
     todos: Todo[];
     onDeleteTodo: (id: number) => void;
     onToggleTodo: (id: number) => void;

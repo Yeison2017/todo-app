@@ -1,6 +1,6 @@
 import { Todo } from "../interfaces/Todo.interfaces";
 
-interface TodoItemProps extends Todo {
+export interface TodoItemProps extends Todo {
     onDeleteTodo: (id: number) => void;
     onToggleTodo: (id: number) => void;
 }
@@ -19,6 +19,7 @@ const TodoItem = ({
                     done ? "text-decoration-line-through" : ""
                 }`}
                 onClick={() => onToggleTodo(id)}
+                aria-label="span"
             >
                 {desc}
             </span>
