@@ -1,12 +1,12 @@
 import { ACTION_TYPES } from "../helpers/constants";
 
-interface InitialState {
+export interface InitialState {
     id: number;
     desc: string;
     done: boolean;
 }
 
-interface Action {
+export interface Action {
     type: string;
     payload?: any;
 }
