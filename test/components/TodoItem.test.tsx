@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import TodoItem from "../../src/components/TodoItem";
 import { Todo } from "../../src/interfaces/Todo.interfaces";
 
@@ -33,5 +33,50 @@ describe("Pruebas en <TodoItem />", () => {
         expect(spanElement.className).not.toContain(
             "text-decoration-line-through"
         );
+    });
+
+    test("debe de mostrar el Todo completado", () => {
+        todo.done = true;
+
+        render(
+            <TodoItem
+                onDeleteTodo={onDeleteTodoMock}
+                onToggleTodo={onToggleTodoMock}
+                {...todo}
+            />
+        );
+
+        const spanElement = screen.getByLabelText("span");
+        expect(spanElement.className).toContain("text-decoration-line-through");
+    });
+
+    test("debe de llamar el ToggleTodo cuando se hace click", () => {
+        render(
+            <TodoItem
+                onDeleteTodo={onDeleteTodoMock}
+                onToggleTodo={onToggleTodoMock}
+                {...todo}
+            />
+        );
+
+        const spanElement = screen.getByLabelText("span");
+        fireEvent.click(spanElement);
+
+        expect(onToggleTodoMock).toHaveBeenCalledWith(todo.id);
+    });
+
+    test("button debe de llamar el deleteTodo", () => {
+        render(
+            <TodoItem
+                onDeleteTodo={onDeleteTodoMock}
+                onToggleTodo={onToggleTodoMock}
+                {...todo}
+            />
+        );
+
+        const deleteButton = screen.getByRole("button");
+        fireEvent.click(deleteButton);
+
+        expect(onDeleteTodoMock).toHaveBeenCalledWith(todo.id);
     });
 });
