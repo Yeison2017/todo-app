@@ -17,4 +17,4 @@ A continuación se muestran algunas capturas de pantalla de la aplicación en de
 Este proyecto fue creado a partir del curso "React: De cero a experto ( Hooks y MERN )" dictado por Fernando Herrera en Udemy. El link del curso es https://www.udemy.com/course/react-cero-experto/.
 
 ## Enlace
-Puedes ver la aplicación en acción en el siguiente enlace: [Live site URL](https://todo-react-yha.netlify.app/).
+Puedes ver la aplicación en acción en el siguiente enlace: [URL del sitio](https://todo-react-yha.netlify.app/).
